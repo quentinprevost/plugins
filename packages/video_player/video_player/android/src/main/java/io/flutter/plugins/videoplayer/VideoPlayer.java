@@ -163,7 +163,7 @@ final class VideoPlayer {
 
     surface = new Surface(textureEntry.surfaceTexture());
     exoPlayer.setVideoSurface(surface);
-    setAudioAttributes(exoPlayer);
+    setAudioAttributes(exoPlayer, true);
 
     exoPlayer.addListener(
         new EventListener() {
@@ -206,7 +206,7 @@ final class VideoPlayer {
   private static void setAudioAttributes(SimpleExoPlayer exoPlayer) {
     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
       exoPlayer.setAudioAttributes(
-          new AudioAttributes.Builder().setContentType(C.CONTENT_TYPE_MOVIE).build());
+          new AudioAttributes.Builder().setContentType(C.CONTENT_TYPE_MOVIE).build(), false);
     } else {
       exoPlayer.setAudioStreamType(C.STREAM_TYPE_MUSIC);
     }
