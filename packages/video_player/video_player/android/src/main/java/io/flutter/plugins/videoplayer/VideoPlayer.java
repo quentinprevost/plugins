@@ -163,7 +163,7 @@ final class VideoPlayer {
 
     surface = new Surface(textureEntry.surfaceTexture());
     exoPlayer.setVideoSurface(surface);
-    setAudioAttributes(exoPlayer, true);
+    setAudioAttributes(exoPlayer);
 
     exoPlayer.addListener(
         new EventListener() {
