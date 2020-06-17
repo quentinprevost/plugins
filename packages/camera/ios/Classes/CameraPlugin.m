@@ -769,8 +769,6 @@ FourCharCode const videoFormat = kCVPixelFormatType_32BGRA;
       _isAudioSetup = NO;
     }
   }
-
-    _captureSession.automaticallyConfiguresApplicationAudioSession = false;
 }
 @end
 
