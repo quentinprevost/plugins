@@ -304,9 +304,6 @@ static inline CGFloat radiansToDegrees(CGFloat radians) {
 
 - (void)sendInitialized {
   if (_eventSink && !_isInitialized) {
-      [[AVAudioSession sharedInstance] setActive:false withOptions: AVAudioSessionSetActiveOptionNotifyOthersOnDeactivation error:nil];
-         [[AVAudioSession sharedInstance] setCategory:AVAudioSessionCategoryPlayback withOptions: AVAudioSessionCategoryOptionMixWithOthers|AVAudioSessionCategoryOptionDuckOthers error:nil];
-         [[AVAudioSession sharedInstance]  setActive:true error:nil];
     CGSize size = [self.player currentItem].presentationSize;
     CGFloat width = size.width;
     CGFloat height = size.height;
@@ -478,7 +475,7 @@ static inline CGFloat radiansToDegrees(CGFloat radians) {
 
 - (void)initialize:(FlutterError* __autoreleasing*)error {
   // Allow audio playback when the Ring/Silent switch is set to silent
-    [[AVAudioSession sharedInstance] setActive:false withOptions: AVAudioSessionSetActiveOptionNotifyOthersOnDeactivation error:nil];
+    [[AVAudioSession sharedInstance] setActive:false error:nil];
     [[AVAudioSession sharedInstance] setCategory:AVAudioSessionCategoryPlayback withOptions: AVAudioSessionCategoryOptionMixWithOthers|AVAudioSessionCategoryOptionDuckOthers error:nil];
     [[AVAudioSession sharedInstance]  setActive:true error:nil];
   for (NSNumber* textureId in _players) {
