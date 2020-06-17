@@ -38,7 +38,6 @@ enum ResolutionPreset {
   max,
 }
 
-// ignore: inference_failure_on_function_return_type
 typedef onLatestImageAvailable = Function(CameraImage image);
 
 /// Returns the resolution preset as a String.
@@ -339,7 +338,7 @@ class CameraController extends ValueNotifier<CameraValue> {
   /// The file can be read as this function returns.
   ///
   /// Throws a [CameraException] if the capture fails.
-  Future<void> takePicture(String path) async {
+  Future<void> takePicture(String path, {bool flash = false}) async {
     if (!value.isInitialized || _isDisposed) {
       throw CameraException(
         'Uninitialized CameraController.',
@@ -356,7 +355,11 @@ class CameraController extends ValueNotifier<CameraValue> {
       value = value.copyWith(isTakingPicture: true);
       await _channel.invokeMethod<void>(
         'takePicture',
-        <String, dynamic>{'textureId': _textureId, 'path': path},
+        <String, dynamic>{
+          'textureId': _textureId,
+          'path': path,
+          'flash': flash,
+        },
       );
       value = value.copyWith(isTakingPicture: false);
     } on PlatformException catch (e) {
@@ -445,7 +448,7 @@ class CameraController extends ValueNotifier<CameraValue> {
       throw CameraException(e.code, e.message);
     }
 
-    await _imageStreamSubscription.cancel();
+    _imageStreamSubscription.cancel();
     _imageStreamSubscription = null;
   }
 

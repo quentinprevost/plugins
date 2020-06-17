@@ -2,8 +2,6 @@
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
 
-// ignore_for_file: public_member_api_docs
-
 import 'dart:async';
 import 'dart:io';
 
@@ -451,7 +449,7 @@ class _CameraExampleHomeState extends State<CameraExampleHome>
     }
 
     try {
-      await controller.takePicture(filePath);
+      await controller.takePicture(filePath, flash: false);
     } on CameraException catch (e) {
       _showCameraException(e);
       return null;
@@ -474,7 +472,7 @@ class CameraApp extends StatelessWidget {
   }
 }
 
-List<CameraDescription> cameras = [];
+List<CameraDescription> cameras;
 
 Future<void> main() async {
   // Fetch the available cameras before initializing the app.

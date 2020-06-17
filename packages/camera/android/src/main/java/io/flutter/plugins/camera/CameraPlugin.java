@@ -68,7 +68,7 @@ public final class CameraPlugin implements FlutterPlugin, ActivityAware {
   public void onAttachedToActivity(@NonNull ActivityPluginBinding binding) {
     maybeStartListening(
         binding.getActivity(),
-        flutterPluginBinding.getBinaryMessenger(),
+        flutterPluginBinding.getFlutterEngine().getDartExecutor(),
         binding::addRequestPermissionsResultListener,
         flutterPluginBinding.getFlutterEngine().getRenderer());
   }
