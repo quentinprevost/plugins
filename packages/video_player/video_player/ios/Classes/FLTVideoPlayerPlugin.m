@@ -475,12 +475,7 @@ static inline CGFloat radiansToDegrees(CGFloat radians) {
 
 - (void)initialize:(FlutterError* __autoreleasing*)error {
   // Allow audio playback when the Ring/Silent switch is set to silent
-    
-    if (@available(iOS 10.0, *)) {
-        [[AVAudioSession sharedInstance] setCategory:AVAudioSessionCategoryPlayback mode:AVAudioSessionModeVideoRecording options: AVAudioSessionCategoryOptionMixWithOthers|AVAudioSessionCategoryOptionAllowBluetoothA2DP|AVAudioSessionCategoryOptionAllowBluetooth|AVAudioSessionCategoryOptionAllowAirPlay error:nil];
-    } else {
-        // Fallback on earlier versions
-    }
+  [[AVAudioSession sharedInstance] setCategory:AVAudioSessionCategoryPlayback withOptions: AVAudioSessionCategoryOptionMixWithOthers|AVAudioSessionCategoryOptionDuckOthers error:nil];
   for (NSNumber* textureId in _players) {
     [_registry unregisterTexture:[textureId unsignedIntegerValue]];
     [_players[textureId] dispose];
