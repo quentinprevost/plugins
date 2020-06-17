@@ -475,6 +475,7 @@ static inline CGFloat radiansToDegrees(CGFloat radians) {
 
 - (void)initialize:(FlutterError* __autoreleasing*)error {
   // Allow audio playback when the Ring/Silent switch is set to silent
+    [[AVAudioSession sharedInstance] setActive:false error:nil];
   [[AVAudioSession sharedInstance] setCategory:AVAudioSessionCategoryPlayback withOptions: AVAudioSessionCategoryOptionMixWithOthers|AVAudioSessionCategoryOptionDuckOthers error:nil];
     [[AVAudioSession sharedInstance] setActive:true error:nil];
   for (NSNumber* textureId in _players) {
@@ -540,6 +541,9 @@ static inline CGFloat radiansToDegrees(CGFloat radians) {
 }
 
 - (void)play:(FLTTextureMessage*)input error:(FlutterError**)error {
+     [[AVAudioSession sharedInstance] setActive:false error:nil];
+    [[AVAudioSession sharedInstance] setCategory:AVAudioSessionCategoryPlayback withOptions: AVAudioSessionCategoryOptionMixWithOthers|AVAudioSessionCategoryOptionDuckOthers error:nil];
+      [[AVAudioSession sharedInstance] setActive:true error:nil];
   FLTVideoPlayer* player = _players[input.textureId];
   [player play];
 }
