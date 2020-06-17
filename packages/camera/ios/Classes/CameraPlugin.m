@@ -899,8 +899,6 @@ FourCharCode const videoFormat = kCVPixelFormatType_32BGRA;
     } else if ([@"dispose" isEqualToString:call.method]) {
       [_registry unregisterTexture:textureId];
       [_camera close];
-        [[AVAudioSession sharedInstance] setCategory:AVAudioSessionCategoryPlayback withOptions: AVAudioSessionCategoryOptionMixWithOthers error:nil];
-        [[AVAudioSession sharedInstance]  setActive:true error:nil];
       _dispatchQueue = nil;
       result(nil);
     } else if ([@"prepareForVideoRecording" isEqualToString:call.method]) {
