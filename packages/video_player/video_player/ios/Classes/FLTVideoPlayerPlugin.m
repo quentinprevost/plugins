@@ -476,7 +476,6 @@ static inline CGFloat radiansToDegrees(CGFloat radians) {
 - (void)initialize:(FlutterError* __autoreleasing*)error {
   // Allow audio playback when the Ring/Silent switch is set to silent
     [[AVAudioSession sharedInstance] setCategory:AVAudioSessionCategoryPlayback withOptions: AVAudioSessionCategoryOptionMixWithOthers error:nil];
-    [[AVAudioSession sharedInstance]  setActive:true error:nil];
   for (NSNumber* textureId in _players) {
     [_registry unregisterTexture:[textureId unsignedIntegerValue]];
     [_players[textureId] dispose];
@@ -510,7 +509,6 @@ static inline CGFloat radiansToDegrees(CGFloat radians) {
   FLTVideoPlayer* player = _players[input.textureId];
   [_registry unregisterTexture:input.textureId.intValue];
   [_players removeObjectForKey:input.textureId];
-    [[AVAudioSession sharedInstance] setActive:false withOptions: AVAudioSessionSetActiveOptionNotifyOthersOnDeactivation error:nil];
   // If the Flutter contains https://github.com/flutter/engine/pull/12695,
   // the `player` is disposed via `onTextureUnregistered` at the right time.
   // Without https://github.com/flutter/engine/pull/12695, there is no guarantee that the
